@@ -1,6 +1,6 @@
 # Amazon–Globalstar Merger Arbitrage
 
-Python version of my risk-arbitrage analysis of Amazon's cash-and-stock acquisition of Globalstar (announced April 13, 2026). It models a long GSAT / short AMZN position and computes blended consideration, gross and net spread, carry, downside if the deal breaks, market-implied probability of failure, and expected return, both for a single date and as a daily time series since announcement.
+Python version of my risk-arbitrage analysis of Amazon's cash-and-stock acquisition of Globalstar (announced April 13, 2026). It models a long GSAT / short AMZN position and computes blended consideration, gross and net spread, carry, downside if the deal breaks, market-implied probability of failure, and expected return, both for a single date and as a daily time series since announcement. It also measures the hedged position's risk (realized volatility, beta to the S&P 500, VaR/ES, and stress tests), updated for the October 2026 FCC approval.
 
 ## Quick start
 
@@ -63,7 +63,7 @@ The FCC approved the deal on October 27, 2026, which was the main regulatory ris
 
 June's −18% AMZN fail price actually *shrank* the modeled downside, because the position is short AMZN. Holding AMZN flat is the conservative choice.
 
-**Spread and implied P(fail).** On June 18 the gross spread was 3.31% and the market-implied P(fail) was 11.33%. The market priced in the FCC ruling ahead of time: the gross spread averaged 2.35% over the 21 trading days before October 27 (September 28–October 26), tightened to 1.01% on the day of the ruling, and averaged 1.19% from the ruling through November 6 (9 trading days). The average implied P(fail) fell from 8.64% to 2.02% over the same windows. On October 29, AMZN fell 4.2% while GSAT fell only 0.6%, so the spread briefly went negative (−0.69%). By November 6 the spread had widened back to 1.92% (1.10% net of carry, 2.54% annualized) after an AMZN rally that GSAT didn't follow. That leaves an implied P(fail) of 6.93% against our 2.5% estimate, and an expected return of 0.70% to the April 2027 close.
+**Spread and implied P(fail).** On June 18 the gross spread was 3.31% and the market-implied P(fail) was 11.33%. The market priced in the FCC ruling ahead of time: the gross spread averaged 2.35% over the 21 trading days before October 27 (September 28–October 26), tightened to 1.01% on the day of the ruling, and averaged 1.19% from the ruling through November 6 (9 trading days). The average implied P(fail) fell from 8.64% to 2.02% over the same windows. On October 29, AMZN fell 4.2% while GSAT fell only 0.6%, so the gross spread briefly went negative (−0.69%, or −1.61% net of carry): GSAT closed above the deal value that day. By November 6 the spread had widened back to 1.92% (1.10% net of carry, 2.54% annualized) after an AMZN rally that GSAT didn't follow. That leaves an implied P(fail) of 6.93% against our 2.5% estimate, and an expected return of 0.70% to the April 2027 close.
 
 ![Exhibit 3: Market-implied probability of failure](docs/exhibit_3_implied_pfail.png)
 
@@ -98,4 +98,4 @@ Stress tests from November 6 (`--risk --deal gsat_amzn_nov2026`): deal break −
 - **Other simplifications.**
   - Fail prices are fixed in config and applied to every date in the time series.
   - The minimum-variance ratio is fit in-sample.
-  - Closing prices aren't simultaneous, and GSAT is thinly traded, so small negative spreads may not have been tradeable.
+  - Closing prices aren't simultaneous, and GSAT is thinly traded, so small negative gross spreads (GSAT closing above the deal value, as on 10/29) may not have been tradeable.
