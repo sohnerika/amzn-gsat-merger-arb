@@ -1,1 +1,3 @@
-from merger_arb.models.engine import compute_metrics, sensitivity_table, build_time_series  # noqa: F401
+from merger_arb.models.engine import (  # noqa: F401
+    compute_metrics, sensitivity_table, build_time_series, compare_deals,
+)

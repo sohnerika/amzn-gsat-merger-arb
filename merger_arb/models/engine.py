@@ -65,6 +65,26 @@ def sensitivity_table(deal: DealInputs, as_of: date, p_target: float,
     return pd.DataFrame(rows).set_index("scenario")
 
 
+def compare_deals(deals: dict, as_of: date, p_target: float,
+                  p_acquirer: float) -> pd.DataFrame:
+    """Same prices, different assumption sets: one column per deal config.
+
+    Rows are the assumptions that differ between configs, then the base-case metrics.
+    """
+    cols = {}
+    for label, deal in deals.items():
+        m = compute_metrics(deal, as_of, p_target, p_acquirer)
+        cols[label] = {
+            "rf_annual": deal.rf_annual,
+            "prob_fail_assumed": deal.prob_fail_assumed,
+            "fail_p_target": deal.fail_prices.p_target,
+            "fail_p_acquirer": deal.fail_prices.p_acquirer,
+            **{k: v for k, v in m.to_dict().items()
+               if k not in ("as_of", "p_target", "p_acquirer")},
+        }
+    return pd.DataFrame(cols)
+
+
 def build_time_series(deal: DealInputs, prices: pd.DataFrame,
                       close_date: date | None = None) -> pd.DataFrame:
     """Run the engine on every trading day.
