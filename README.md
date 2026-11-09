@@ -1,6 +1,8 @@
-# Amazon–Globalstar Merger Arbitrage
+# Amazon-Globalstar Merger Arbitrage
 
-Python version of my risk-arbitrage analysis of Amazon's cash-and-stock acquisition of Globalstar (announced April 13, 2026). It models a long GSAT / short AMZN position and computes blended consideration, gross and net spread, carry, downside if the deal breaks, market-implied probability of failure, and expected return, both for a single date and as a daily time series since announcement. It also measures the hedged position's risk (realized volatility, beta to the S&P 500, VaR/ES, and stress tests), updated for the October 2026 FCC approval.
+Python version of my risk-arbitrage analysis of Amazon's cash-and-stock acquisition of Globalstar (announced April 13, 2026). Under the merger agreement, Globalstar shareholders can elect to receive $90.00 in cash or 0.3210 shares of Amazon common stock per GSAT share, with the stock consideration capped at $90.00 per share and aggregate cash elections capped at 40% of total shares through proration. The model incorporates both consideration components to calculate blended merger value.
+
+It models a long GSAT / short AMZN position and computes blended consideration, gross and net spread, carry, downside if the deal breaks, market-implied probability of failure, and expected return, both for a single date and as a daily time series since announcement. It also measures the hedged position's risk (realized volatility, beta to the S&P 500, VaR/ES, and stress tests), updated for the October 2026 FCC approval.
 
 ## Quick start
 
